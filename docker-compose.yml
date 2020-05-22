@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+
+  servico_questionarios:
+    build:
+      context: ./servico_questionarios
+    ports:
+      - "49160:8080"
+    depends_on:
+      - database
+      - redis
+
+  database:
+    image: postgres
+    restart: always
+    environment: 
+      - POSTGRES_PASSWORD=techlab
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./db/:/var/lib/postgresql/data
+
+  database_adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
