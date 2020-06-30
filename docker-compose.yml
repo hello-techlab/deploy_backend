@@ -10,12 +10,29 @@ services:
     depends_on:
       - database
       - redis
-  
+
   servico_email:
     build:
       context: ./api-emails
     ports:
       - "49161:8080"
+
+  servico_agendamento:
+    build:
+      context: ./servico_agendamento
+    ports:
+      - "49162:8080"
+    depends_on:
+      - database
+      - redis
+
+  servico_usuario:
+    build:
+      context: ./servico_usuario
+    ports:
+      - "49163:8080"
+    depends_on:
+      - database
 
   database:
     image: postgres
@@ -24,7 +41,7 @@ services:
       - POSTGRES_PASSWORD=techlab
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - ./db/:/var/lib/postgresql/data
+      - ./bd/:/var/lib/postgresql/data
 
   database_adminer:
     image: adminer
