@@ -4,7 +4,7 @@ services:
 
   servico_questionarios:
     build:
-      context: ./servico_questionarios
+      context: ../servico_questionarios
     ports:
       - "49160:8080"
     depends_on:
@@ -13,26 +13,41 @@ services:
 
   servico_email:
     build:
-      context: ./api-emails
+      context: ../api-emails
     ports:
       - "49161:8080"
 
   servico_agendamento:
     build:
-      context: ./servico_agendamento
+      context: ../servico_agendamento
     ports:
       - "49162:8080"
     depends_on:
       - database
       - redis
 
-  servico_usuario:
+  gateway:
     build:
-      context: ./servico_usuario
+      context: ../node-authentication-gateway
     ports:
       - "49163:8080"
+
+  servico_usuario:
+    build:
+      context: ../servico_usuario
+    ports:
+      - "49164:8080"
     depends_on:
       - database
+
+  nginx:
+    build:
+      context: ../nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./techlab_app/public:/app/public
+    restart: always
 
   database:
     image: postgres
@@ -41,7 +56,7 @@ services:
       - POSTGRES_PASSWORD=techlab
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - ./bd/:/var/lib/postgresql/data
+      - ../bd/:/var/lib/postgresql/data
 
   database_adminer:
     image: adminer
