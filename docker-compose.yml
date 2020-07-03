@@ -46,7 +46,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./techlab_app/public:/app/public
+      - ../techlab_app/public:/app/public
     restart: always
 
   database:
