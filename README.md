@@ -54,18 +54,18 @@ Mais informações são fornecidas no README de cada um destes repositórios. Ca
 
 ## 2.3 - Primeira execução 
 
-Para executar os containers da aplicação
+#### 1. Para executar os containers da aplicação: 
 
 ```
 cd /local/do/deploy/deploy_backend
 sudo docker-compose up --build -d
 ```
 
-Na primeira inicialização, o banco de dados estará vazio. É necessário carregar o script de inicialização do banco.
+#### 2. Na primeira inicialização, o banco de dados estará vazio. É necessário carregar o script de inicialização do banco.
 
-Acesse http://techlab-oauth.mooo.com/database_adminer.
+#### 3. Acesse http://techlab-oauth.mooo.com/database_adminer.
 
-Preencha os campos da seguinte maneira:
+#### 4. Preencha os campos da seguinte maneira:
 
 ```
 System: PostgreSQL
@@ -75,17 +75,17 @@ Password: Consulte a equipe de desenvolvimento
 Database: Deixe este campo em branco
 ```
 
-Na tela de administração, selecione "Create database".
+#### 5. Na tela de administração, selecione "Create database".
 
-Na tela "Create database", nomeie o novo banco como "smBD" e clique em "save".
+#### 6. Na tela "Create database", nomeie o novo banco como "smBD" e clique em "save".
 
-Na tela de administração, clique no link nome "smBD".
+#### 7. Na tela de administração, clique no link nome "smBD".
 
-Na tela de schema, selecione a opção "import". Faça upload do arquivo "script.sql", contido no repositório "bd", e execute.
+#### 8. Na tela de schema, selecione a opção "import". Faça upload do arquivo "script.sql", contido no repositório "bd", e execute.
 
-Uma mensagem informando que as queries foram executadas com sucesso será exibida.
+#### 9. Uma mensagem informando que as queries foram executadas com sucesso será exibida.
 
-Agora é preciso reiniciar o aplicativo:
+#### 10. Agora é preciso reiniciar o aplicativo:
 
 ```
 cd /local/do/deploy/deploy_backend
@@ -94,10 +94,3 @@ sudo docker-compose up -d
 ```
 
 Pronto! O sistema está pronto para utilização!
-
-
-
-
-## Referência
-O procedimento de instalação utilizado foi aquele descrito [aqui](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (docker-ce) e [aqui](https://docs.docker.com/compose/install/) (docker-compose)
-
