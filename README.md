@@ -18,12 +18,86 @@ sudo ./install_docker_compose.sh
 ```
 
 # 2 - Deploy
+O projeto foi planejado mirando uma arquitetura divida em microsserviços, para que cada funcionalidade fosse o mais desacoplada quanto possível das outras. Portanto, para iniciar o sistema é necessário clonar todos os repositórios da aplicação, e inserir alguns arquivos de configuração a mais.
+
+O aplicativo exibido foi deployado numa instância de máquina virtual do Google Cloud Platform. Este procedimento de deploy supõe que se tem acesso à uma instância com IP público, e que o nome de domínio http://techlab-oauth.mooo.com/ é redirecionado para este IP público.
+
+## 2.1 - Clonando os repositórios
+
+Todos os repositórios devem ser clonados no mesmo nível desde repositório deploy_backend.
+
+```
+cd /local/do/deploy
+git clone https://github.com/techlabx/deploy_backend
+git clone https://github.com/techlabx/techlab_app
+git clone https://github.com/techlabx/nginx
+git clone https://github.com/techlabx/bd
+git clone https://github.com/techlabx/node-authentication-gateway
+git clone https://github.com/techlabx/api-emails
+git clone https://github.com/techlabx/servico_agendamento
+git clone https://github.com/techlabx/servico_usuario
+git clone https://github.com/techlabx/servico_questrionarios
+```
+
+## 2.2 - Inserindo arquivos sensíveis
+
+Será preciso inserir manualmente alguns arquivos de configuração, que não foram incluídos nos repositórios por conterem dados sensíveis. 
+
+- node-authentication-gateway: arquivos ".env" e ".env.example", configurando as credenciais de autenticação para o Google.
+
+- api-emails: arquivos ".env" e ".env.example", configurando as credenciais do email utilizado para envio das mensagens executado pelo aplicativo.
+
+- servico_agendamento: arquivo "credentials.json", configurando as credenciais que o aplicativo precisa para acessar a agenda Google dos atendentes. 
+
+Mais informações são fornecidas no README de cada um destes repositórios. Caso precise de mais informações, contate a equipe de desenvolvimento através do email leonardo.prati@usp.br
+
+
+## 2.3 - Primeira execução 
+
 Para executar os containers da aplicação
 
 ```
-docker-compose up --build -d
+cd /local/do/deploy/deploy_backend
+sudo docker-compose up --build -d
 ```
 
+Na primeira inicialização, o banco de dados estará vazio. É necessário carregar o script de inicialização do banco.
+
+Acesse http://techlab-oauth.mooo.com/database_adminer.
+
+Preencha os campos da seguinte maneira:
+
+```
+System: PostgreSQL
+Server: database
+Username: postgres
+Password: Consulte a equipe de desenvolvimento
+Database: Deixe este campo em branco
+```
+
+Na tela de administração, selecione "Create database".
+
+Na tela "Create database", nomeie o novo banco como "smBD" e clique em "save".
+
+Na tela de administração, clique no link nome "smBD".
+
+Na tela de schema, selecione a opção "import". Faça upload do arquivo "script.sql", contido no repositório "bd", e execute.
+
+Uma mensagem informando que as queries foram executadas com sucesso será exibida.
+
+Agora é preciso reiniciar o aplicativo:
+
+```
+cd /local/do/deploy/deploy_backend
+sudo docker-compose down
+sudo docker-compose up -d
+```
+
+Pronto! O sistema está pronto para utilização!
+
+
+
+
 ## Referência
-O procedimento de instalação utilizado foi aquele descrito [aqui](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (docker-ce) e [aqui](https://docs.docker.com/compose/install/) (docker-compose).root@deploy:/deploy/deploy_backend# 
+O procedimento de instalação utilizado foi aquele descrito [aqui](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (docker-ce) e [aqui](https://docs.docker.com/compose/install/) (docker-compose)
 
