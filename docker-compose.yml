@@ -32,14 +32,6 @@ services:
     ports:
       - "49163:8080"
 
-  servico_usuario:
-    build:
-      context: ../servico_usuario
-    ports:
-      - "49164:8080"
-    depends_on:
-      - database
-
   nginx:
     build:
       context: ../nginx

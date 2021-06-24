@@ -28,15 +28,14 @@ Todos os repositórios devem ser clonados no mesmo nível desde repositório dep
 
 ```
 cd /local/do/deploy
-git clone https://github.com/techlabx/deploy_backend
-git clone https://github.com/techlabx/techlab_app
-git clone https://github.com/techlabx/nginx
-git clone https://github.com/techlabx/bd
-git clone https://github.com/techlabx/node-authentication-gateway
-git clone https://github.com/techlabx/api-emails
-git clone https://github.com/techlabx/servico_agendamento
-git clone https://github.com/techlabx/servico_usuario
-git clone https://github.com/techlabx/servico_questrionarios
+git clone https://github.com/techlabxplus/deploy_backend
+git clone https://github.com/techlabxplus/techlab_app
+git clone https://github.com/techlabxplus/nginx
+git clone https://github.com/techlabxplus/bd
+git clone https://github.com/techlabxplus/node-authentication-gateway
+git clone https://github.com/techlabxplus/api-emails
+git clone https://github.com/techlabxplus/servico_agendamento
+git clone https://github.com/techlabxplus/servico_questionarios
 ```
 
 ## 2.2 - Inserindo arquivos sensíveis
