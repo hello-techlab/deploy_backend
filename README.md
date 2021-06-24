@@ -18,9 +18,8 @@ sudo ./install_docker_compose.sh
 ```
 
 # 2 - Deploy
-O projeto foi planejado mirando uma arquitetura divida em microsserviços, para que cada funcionalidade fosse o mais desacoplada quanto possível das outras. Portanto, para iniciar o sistema é necessário clonar todos os repositórios da aplicação, e inserir alguns arquivos de configuração a mais.
-
-O aplicativo exibido foi deployado numa instância de máquina virtual do Google Cloud Platform. Este procedimento de deploy supõe que se tem acesso à uma instância com IP público, e que o nome de domínio http://techlab-oauth.mooo.com/ é redirecionado para este IP público.
+Projeto anterior: Google Cloud Plataform
+Somente local, por enquanto
 
 ## 2.1 - Clonando os repositórios
 
@@ -38,20 +37,8 @@ git clone https://github.com/techlabxplus/servico_agendamento
 git clone https://github.com/techlabxplus/servico_questionarios
 ```
 
-## 2.2 - Inserindo arquivos sensíveis
 
-Será preciso inserir manualmente alguns arquivos de configuração, que não foram incluídos nos repositórios por conterem dados sensíveis. 
-
-- node-authentication-gateway: arquivos ".env" e ".env.example", configurando as credenciais de autenticação para o Google.
-
-- api-emails: arquivos ".env" e ".env.example", configurando as credenciais do email utilizado para envio das mensagens executado pelo aplicativo.
-
-- servico_agendamento: arquivo "credentials.json", configurando as credenciais que o aplicativo precisa para acessar a agenda Google dos atendentes. 
-
-Mais informações são fornecidas no README de cada um destes repositórios. Caso precise de mais informações, contate a equipe de desenvolvimento através do email leonardo.prati@usp.br
-
-
-## 2.3 - Primeira execução 
+## 2.2 - Primeira execução 
 
 #### 1. Para executar os containers da aplicação: 
 
@@ -62,7 +49,7 @@ sudo docker-compose up --build -d
 
 #### 2. Na primeira inicialização, o banco de dados estará vazio. É necessário carregar o script de inicialização do banco.
 
-#### 3. Acesse http://techlab-oauth.mooo.com/database_adminer.
+#### 3. Acesse http://localhost:8081
 
 #### 4. Preencha os campos da seguinte maneira:
 
