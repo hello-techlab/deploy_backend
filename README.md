@@ -80,3 +80,6 @@ sudo docker-compose up -d
 ```
 
 Pronto! O sistema está pronto para utilização!
+
+### Teste:
+curl http://localhost:49160/questionarios/lista
